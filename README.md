@@ -11,4 +11,4 @@ The cons of Template Driven Forms is that they are not as flexible as Reactive F
 This approach is best when you need to create a more complex form. Reactive forms allow you to define your form inside your typescript first. You then map each form control to the FormGroup inside your html template.
 Things like validations are set on the FormGroup object within your logic. The benefits to Reactive Forms include flexability and cleaner html template code.
 
-I think it makes sense to use reactive forms unless you have only a couple inputs and you know that you will only ever have that many. If am going to need to scale the form to be more complex or have a lot more inputs reactive forms makes more sense.
+I think it makes sense to use reactive forms unless you have only a couple inputs and you know that you will only ever have that many. If you are going to need to scale the form to be more complex or have a lot more inputs reactive forms makes more sense.
