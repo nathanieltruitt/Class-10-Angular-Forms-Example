@@ -1,27 +1,62 @@
 <!-- ~~~ !TEMPLATE DRIVEN APPROACH! ~~~ -->
-<form>
+<form #formRef="ngForm" (ngSubmit)="onFormSubmit(formRef)">
   <div id="book-data">
     <!-- Title -->
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" id="title" name="title" class="form-control" />
+      <input
+        #titleRef="ngModel"
+        type="text"
+        id="title"
+        name="title"
+        class="form-control"
+        ngModel
+        required
+        [class.invalid]="!titleRef.valid && titleRef.touched"
+      />
+      <span class="text-danger" *ngIf="!titleRef.valid && titleRef.touched"
+        >Please enter a title.</span
+      >
     </div>
 
     <!-- Author -->
     <div class="form-group">
       <label for="author">Author</label>
-      <input type="text" id="author" name="author" class="form-control" />
+      <input
+        #authorRef="ngModel"
+        type="text"
+        id="author"
+        name="author"
+        class="form-control"
+        ngModel
+        required
+        [class.invalid]="!authorRef.valid && authorRef.touched"
+      />
+      <span class="text-danger" *ngIf="!authorRef.valid && authorRef.touched"
+        >Please enter an author.</span
+      >
     </div>
 
     <!-- Genre -->
     <div class="form-group">
       <label for="genre">Genre</label>
-      <select id="genre" name="genre" class="form-control">
+      <select
+        #genreRef="ngModel"
+        id="genre"
+        name="genre"
+        class="form-control"
+        [ngModel]="'mystery'"
+        required
+        [class.invalid]="!genreRef.valid && genreRef.touched"
+      >
         <option value="mystery">Mystery</option>
         <option value="self-help">Self-Help</option>
         <option value="fantasy">Fantasy</option>
         <option value="science-fiction">Science Fiction</option>
       </select>
+      <span class="text-danger" *ngIf="!genreRef.valid && genreRef.touched"
+        >Please enter an author.</span
+      >
     </div>
 
     <!-- isBestSeller -->
@@ -29,15 +64,31 @@
       <p>Is this book a best seller?</p>
 
       <!-- True -->
-      <input type="radio" id="true" name="isBestSeller" value="true" />
+      <input type="radio" id="true" name="isBestSeller" value="true" ngModel />
       <label for="true" class="mr-3">True</label>
 
       <!-- False -->
-      <input type="radio" id="false" name="isBestSeller" value="false" />
+      <input
+        type="radio"
+        id="false"
+        name="isBestSeller"
+        value="false"
+        ngModel
+      />
       <label for="false">False</label>
     </div>
 
     <!-- Submit Button -->
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" [disabled]="!formRef.valid">
+      Submit {{ titleRef.value }}
+    </button>
   </div>
 </form>
+
+<div class="row" *ngIf="hasBeenSubmitted">
+  <div class="col-xs-12">
+    <h1>Title: {{ formRef.value.title }}</h1>
+    <h2>Author: {{ formRef.value.author }}</h2>
+    <p>Genre: {{ formRef.value.genre }}</p>
+  </div>
+</div>
